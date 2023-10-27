@@ -29,7 +29,7 @@ function useRequest() {
     }
     useEffect(() => {
         requestAllShips(`query allShips {
-          vehicles {
+          vehicles (lang: "Ru") {
           title
           description
           icons {
