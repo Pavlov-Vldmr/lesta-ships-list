@@ -7,11 +7,7 @@ import StageOuter from '../components/StageOuter/StageOuter';
 
 function ShipsListPage() {
   // const ships = useRequest();
-  const test =() => {
-    let tr = document.getElementsByTagName("tr");
-    let test = tr[0].getAttribute("content")
-    console.log(test)
-  }
+
 
   return (<>
   {console.log("1")} 
