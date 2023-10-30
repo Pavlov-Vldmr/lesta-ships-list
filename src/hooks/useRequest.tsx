@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { IShipsData, IShip } from "../models/shipModel";
+import { IShip } from "../models/shipModel";
 // import { json } from "stream/consumers"
 function useRequest() {
     const [ships, setShips] = useState<IShip[]>([]);

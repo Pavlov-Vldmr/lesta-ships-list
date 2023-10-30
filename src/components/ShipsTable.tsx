@@ -1,75 +1,71 @@
-import {
-    Column,
-    Table as ReactTable,
-    PaginationState,
-    useReactTable,
-    getCoreRowModel,
-    //   getFilteredRowModel,
-    getPaginationRowModel,
-    ColumnDef,
-    OnChangeFn,
-    flexRender,
-    createColumnHelper,
-    Pagination,
-} from "@tanstack/react-table";
+import React from "react";
+// import {
+//     Column,
+//     Table as ReactTable,
+//     PaginationState,
+//     useReactTable,
+//     getCoreRowModel,
+//     getPaginationRowModel,
+//     flexRender,
+//     createColumnHelper,
+//     getSortedRowModel,
+// } from "@tanstack/react-table";
+
 import { useRequest } from "../hooks/useRequest"
 import { useState } from "react";
-import { Box, useQuery } from "@chakra-ui/react";
-import { title } from "process";
 import { IShipsData } from "../models/shipModel";
-import { compose } from "@chakra-ui/utils";
+import Int2roman from "./Int2roman"
+import Filters from "./Filters"
 
 import styles from "./ShipsTable.module.scss";
-import React from "react";
+import {
+    createColumnHelper,
+    flexRender,
+    getCoreRowModel,
+    getPaginationRowModel,
+    getSortedRowModel,
+
+    useReactTable,
+    // getFilteredRowModel,
+} from "@tanstack/react-table";
+
+import { getFilteredRowModel as getFilteredRmodel } from "@tanstack/react-table";
+import FilterPopoverLevel from "./filters/FilterPopoverLevel";
+import { Box, Button, ButtonGroup, HStack, Icon, SelectField, Text } from "@chakra-ui/react";
+
+
+
 
 
 function ShipsTable() {
-
-    const int2roman = (original: number): string => {
-        if (original < 1 || original > 3999) {
-            throw new Error('Error: Input integer limited to 1 through 3,999');
-        }
-        const numerals = [
-            ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'], // 1-9
-            ['X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'], // 10-90
-        ];
-
-        const digits = Math.round(original).toString().split('');
-        let position = (digits.length - 1);
-
-        return digits.reduce((roman, digit) => {
-            if (digit !== '0') {
-                roman += numerals[position][parseInt(digit) - 1];
-            }
-            position -= 1;
-            return roman;
-        }, '');
-    }
-
-
-    const shipsData = useRequest();
-    const data = shipsData as unknown as IShipsData[];
+    
+    const data = useRequest() as unknown as IShipsData[];
     const columnHelper = createColumnHelper<IShipsData>()
     const columns = [
         columnHelper.accessor('image', {
             header: "image",
             cell: (props: any) => <> <img className={styles.ship_image} src={props.getValue()} width='100px' height='20px' alt="" />  </>
         }),
-        
+
         columnHelper.accessor('class', {
             header: "class",
             cell: (props: { getValue: () => any; }) => <><span className={styles.ship_class}>{props.getValue()}</span></>
         }),
         columnHelper.accessor('title', {
             header: 'Название',
+            enableColumnFilter: true,
+            filterFn: "includesString",
             cell: (props: { getValue: () => any; }) => <><span className={styles.ship_title}>{props.getValue()}</span></>
         }),
-        {
-            accessorKey: 'level',
+        columnHelper.accessor('level', {
             header: 'Уровень',
-            cell: (props: any) => <><span className={styles.ship_level}>{int2roman(props.getValue())}</span></>
-        },
-        
+            enableColumnFilter: true,
+            filterFn: (row, columnId, filterStatuses) => {
+                const level = row.getValue(columnId)
+                return filterStatuses.includes(level)
+            },
+            cell: (props: any) => <><span className={styles.ship_level}>{Int2roman(props.getValue())}</span></>
+        }),
         columnHelper.accessor('nation.color', {
             header: 'nation color',
             cell: (props: any) => <><span className={styles.ship_cColor}>{props.getValue()}</span></>
@@ -88,50 +84,63 @@ function ShipsTable() {
         }),
         columnHelper.accessor('description', {
             header: "Описание",
-            cell: (props: any) => <> <p className={styles.ship_description} >{props.getValue()}</p></>
+            cell: (props: any) => <> <p onClick={showDescription} className={descriptionIsActive ? styles.ship_description : styles.ship_descriptionShow} >{props.getValue()}</p></>
         }),
-        
     ]
+    const [columnFilters, setColumnFilters] = useState([
 
-
-
+    ])
     const table = useReactTable({
         data,
         columns,
-
-        getCoreRowModel: getCoreRowModel(),
         manualPagination: false,
+        getCoreRowModel: getCoreRowModel(),
+        getFilteredRowModel: getFilteredRmodel(),
         getPaginationRowModel: getPaginationRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        state: {
+            columnFilters
+        },
         initialState: {
             pagination: {
                 pageSize: 5,
-                pageIndex: 1
+                pageIndex: 0
             }
         }
-
     });
 
-    const trClickedHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-        const tr = event.currentTarget;
-        const desc = tr.querySelector('td > p')
-        // setStyleAttribute(desc, 'visibility: visible')
-        desc?.classList.add()
-        // console.log(desc)
-        // const regexp = /\*/
-        // console.log(tr.querySelector())
-        // tr.querySelector('td > p').classList.add('_description-show')
-        
-      };
+    const trClickedHandler = (event: React.MouseEvent<HTMLElement>) => {
+        console.log()
+        // const tr = event.currentTarget;
+        // const desc = tr.querySelector('td > p')
 
-   
+
+    };
+    const [descriptionIsActive, descriptionSetIsAcrive] = useState(true)
+    const showDescription = () => {
+        descriptionSetIsAcrive(current => !current);
+    }
+    const [isActive, setIsActive] = useState(true);
+
+    const testFn = () => {
+        setIsActive(current => !current);
+        // alert('s')
+        console.log()
+    }
+
 
     return (
         <div>
-            <div className={styles.pagePagination}>
-                <span>{table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
-                </span>
-                <select
-                    className={styles.pageCounts}
+            <HStack position={'absolute'} zIndex={999} className={styles.pagePaginations}>
+                <Filters columnFilters={columnFilters}
+                    setColumnFilters={setColumnFilters}
+                />
+                <Button onClickCapture={testFn} >Table Mode</Button>
+                
+                <Text>{table.getState().pagination.pageIndex + 1} / {table.getPageCount()}</Text>
+                
+                <SelectField
+                className={styles.pageCounts}
                     value={table.getState().pagination.pageSize}
                     onChange={e => {
                         table.setPageSize(Number(e.target.value))
@@ -142,22 +151,27 @@ function ShipsTable() {
                             Show {pageSize}
                         </option>
                     ))}
-                </select>
-                <button
-                    className="border rounded p-1"
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    {'<'}
-                </button>
-                <button
-                    className="border rounded p-1"
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    {'>'}
-                </button>
-            </div>
+                </SelectField>
+                
+                <ButtonGroup>
+                    <Button
+                        className="border rounded p-1"
+                        onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        {'<'}
+                    </Button>
+                    <Button
+                        className="border rounded p-1"
+                        onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        {'>'}
+                    </Button>
+                </ButtonGroup>
+
+                
+            </HStack>
 
             <table >
 
@@ -179,10 +193,10 @@ function ShipsTable() {
                 </thead>
                 <tbody>
                     {table.getRowModel().rows.map(row => (
-                        <tr key={row.id}  style={{backgroundColor: row.original.nation.color+'22' }} onClick={trClickedHandler} content={row.original.nation.color} className={styles.shipContainer}>
-                            
+                        <tr key={row.id} style={{ backgroundColor: row.original.nation.color + '22' }} onClick={trClickedHandler} content={row.original.nation.color} className={isActive ? styles.shipContainer : styles.shipTable}>
+
                             {row.getVisibleCells().map(cell => (
-                                
+
                                 <td key={cell.id}>
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                 </td>

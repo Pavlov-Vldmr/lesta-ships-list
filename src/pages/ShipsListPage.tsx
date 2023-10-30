@@ -10,20 +10,12 @@ function ShipsListPage() {
 
 
   return (<>
-  {console.log("1")} 
-    <StageOuter/>
+    {console.log("1")}
+    <StageOuter />
     <ShipsTable></ShipsTable>
-  {/* {test()}  */}
-  
-
   </>
-   
-   
-  //  {console.log('res: ' + ships[1].nation.name)} 
-   
-
   );
-  console.log('3');
+  // console.log('3');
 }
 
 export default ShipsListPage;
