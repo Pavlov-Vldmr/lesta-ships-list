@@ -1,7 +1,7 @@
 {
   "name": "lesta-ships-list",
   "version": "0.1.0",
-  "homepage": "http://pavlov-vldmr.github.io/lesta-ships-list",
+  
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.8.1",
