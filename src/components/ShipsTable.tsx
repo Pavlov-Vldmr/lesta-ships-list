@@ -139,9 +139,7 @@ function ShipsTable() {
     const toTableSwitch = () => {
         const allTr = document.querySelectorAll('tr')
         let arrayTr = Array.from(allTr)
-        console.log(arrayTr)
         arrayTr.map(el => {
-            console.log(el)
             el.style.height = '100px'
             el.classList.remove('ship_descriptionShow')
         })
