@@ -65,6 +65,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 - React.memo
 - Кэширование
 - Использовать Appolo. Позволит избежать лишних запросов.  Апдейт данных в кэше.
+- Дизайн
 
 
 ## Table mode
