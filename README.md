@@ -1,8 +1,11 @@
 # Корабли
 ![Снимок экрана 2023-11-02 135719](https://github.com/Pavlov-Vldmr/lesta-ships-list/assets/72386678/da21319f-d1aa-4c9c-959a-2d8cf3ccd7bb)
 
-- [Markdown Navigation](#markdown-navigation)
-    - [Links](#links)
+- [Navigation](#markdown-navigation) 
+    - [Start project](#start-project)
+    - [Как можно улучшить](#how-to-improve)
+    - [Table mode](#table-mode)
+    - [Resources](#resources)
 
 [Tools and Technologies Used](#tools-and-technologies-used)
 ## Task
@@ -53,6 +56,16 @@ Runs the app.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
-## Links
+## how to improve
+- 1
+
+
 ## Table mode
 ![Снимок экрана 2023-11-02 140205](https://github.com/Pavlov-Vldmr/lesta-ships-list/assets/72386678/cfb2b728-ff42-4677-a44b-ea9e3140f8c8)
+
+## Resources
+- [React](https://react.dev/reference/react)
+- [Sass](https://sass-lang.com)
+- [Graphql](https://graphql.org)
+- [Chakra-ui](https://chakra-ui.com)
+- [TanStack Table](https://tanstack.com/table/v8)
