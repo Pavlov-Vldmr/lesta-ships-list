@@ -2,7 +2,6 @@ import React from "react";
 // import { useRequest } from "../hooks/useRequest"
 // import { IShipsData } from "../models/shipModel";
 import ShipsTable from "../components/ShipsTable"
-import StageOuter from '../components/StageOuter/StageOuter';
 
 
 function ShipsListPage() {
@@ -11,7 +10,6 @@ function ShipsListPage() {
 
   return (<>
     {console.log("1")}
-    <StageOuter />
     <ShipsTable></ShipsTable>
   </>
   );

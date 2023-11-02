@@ -12,11 +12,11 @@ import {
 } from '@chakra-ui/react'
 
 const levels = [
-    {level: 1, id: 0},
-    {level: 2, id: 1},
-    {level: 3, id: 2},
-    {level: 4, id: 3},
-    {level: 5, id: 4}
+    { level: 1, id: 0 },
+    { level: 2, id: 1 },
+    { level: 3, id: 2 },
+    { level: 4, id: 3 },
+    { level: 5, id: 4 }
 
 ]
 
@@ -33,8 +33,8 @@ const LevelItem = ({ level, setColumnFilters }: any) => <Flex
     }}
     onClick={() => {
         console.log(level)
-        setColumnFilters=(
-            ( prev: any[]) => {
+        setColumnFilters = (
+            (prev: any[]) => {
                 console.log('lll');
                 const leveles = prev.find((filter) => filter.id === 'level')?.value;
                 if (!leveles) {
@@ -47,15 +47,15 @@ const LevelItem = ({ level, setColumnFilters }: any) => <Flex
             }
         )
     }}
-    >
-        {level.level}
-    </Flex>
+>
+    {level.level}
+</Flex>
 
 
 
-function FilterPopoverLevel ({columnFilters, setColumnFilters} : any) {
+function FilterPopoverLevel({ columnFilters, setColumnFilters }: any) {
     const filterStatuses =
-    columnFilters.find((f: { id: string }) => f.id === "level")?.value || [];
+        columnFilters.find((f: { id: string }) => f.id === "level")?.value || [];
 
     return (
         <Popover isLazy>
@@ -70,7 +70,7 @@ function FilterPopoverLevel ({columnFilters, setColumnFilters} : any) {
                             <LevelItem
                                 level={level}
                                 key={level.id}
-                                
+
                                 setColumnFilters={setColumnFilters}
                             >
 

@@ -35,6 +35,7 @@ function useRequest() {
           icons {
             large
             medium
+            contour
           }
           level
           type {

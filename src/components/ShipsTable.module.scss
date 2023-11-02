@@ -1,187 +1,219 @@
-table {
-  position: relative;
-  z-index: 888;
-  margin-top: 100px;
-  border-spacing: 0px 20px;
-  border-collapse: separate;
-  width: 700px;
+%flex-center {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+.container {
+  width: fit-content;
   margin: auto;
   top: 100px;
-  tbody {
-    border-collapse: separate;
+  position: relative;
+  @extend %flex-center;
+
+  .pagePaginations {
+    width: fit-content;
+    background-color: rgb(87 87 87 / 21%);
+    padding: 20px;
   }
-
-  .shipTable {
-    color: wheat;
-
-    background: rgba(255, 255, 255, 0.806);
-
-    .ship_image {
-      user-select: none;
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 100px;
-    }
-  }
-
-  .shipContainer {
-    cursor: pointer;
-    z-index: 2;
+  .table_ {
     position: relative;
-    height: 100px;
-    width: 900px;
-    background: rgba(187, 207, 216, 0.55);
-    background-image: url(./../../src/assets/img/orange_plate.svg);
-    background-position: top right;
-    background-size: 95px 21px;
-    background-repeat: no-repeat;
-    box-shadow: 5px 10px 4px 0px rgba(0, 0, 0, 0.2);
-    transition: all 1s ease-in-out;
-
-    &:hover {
-      background-color: rgba(91, 105, 110, 0.705);
-
-      table {
-      }
-      td {
-      }
-      .ship_image {
-        transform: scale(1.3) translateY(-10px);
-      }
+    z-index: 888;
+    border-spacing: 0px 30px;
+    border-collapse: initial !important;
+    margin: auto;
+    thead {
+      display: none;
     }
 
-    td {
+    .shipContainer {
+      cursor: pointer;
+      z-index: 2;
       position: relative;
-    }
+      height: 100px;
+      width: 700px;
+      box-shadow: 5px 10px 4px 0px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.61, 0.42, 0.92, 0.82);
 
-    .ship_image {
-      user-select: none;
-
-      transition: all 1s ease-in-out;
-      top: -37px;
-      z-index: 10;
-      left: -91px;
-      position: absolute;
-      width: 278px;
-      height: auto;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 95px;
+        height: 21px;
+        background-image: url(./../../src/assets/img/orange_plate.svg);
+        background-position: top right;
+        background-size: 95px 21px;
+        background-repeat: no-repeat;
+        top: 0;
+        right: 0;
+      }
 
       &:hover {
-        // cursor: not-allowed;
+        background-color: rgba(91, 105, 110, 0.705);
+
+        table {
+        }
+        td {
+        }
+        .ship_image {
+          transform: scale(1.3) translateY(-10px);
+        }
       }
-    }
 
-    .ship_class {
-    }
+      .ship_image {
+        user-select: none;
+        transition: all 1s ease-in-out;
+        top: -40px;
+        z-index: 10;
+        left: -65px;
+        position: absolute;
+        width: 278px;
+        height: auto;
+      }
 
-    .ship_countryFlag {
-      z-index: 9;
-      transform: translateX(-409px);
-      object-fit: cover;
-      width: 275px;
-      height: 100px;
-    }
+      .ship_class {
+      }
 
-    .ship_country,
-    .ship_level,
-    .ship_class {
-      position: absolute;
-      z-index: 5;
-      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      color: #fffefe;
-      font-family: "Roboto";
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      text-transform: uppercase;
-    }
+      .ship_countryFlag {
+        position: absolute;
+        z-index: 9;
+        left: 0;
+        top: 0;
+        object-fit: cover;
+        width: 275px;
+        height: 100px;
+      }
 
-    .ship_country {
-      display: flex;
-      width: 100%;
-      justify-content: flex-end;
-      align-items: flex-end;
-      left: 297px;
-      bottom: 84px;
-      font-size: 17px;
-    }
-    .ship_level {
-      left: 486px;
-      width: 200px;
-      top: 1px;
-      font-size: 16px;
-    }
-    .ship_class {
-      display: none;
-      left: 102px;
-      width: 200px;
-      bottom: 3px;
-    }
+      .ship_country,
+      .ship_level,
+      .ship_class {
+        position: absolute;
+        z-index: 5;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        color: #fffefe;
+        font-family: "Roboto";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: uppercase;
+      }
 
-    .ship_cColor {
-      display: none;
-    }
+      .ship_country {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        align-items: flex-end;
+        left: -100px;
+        top: 0;
+        font-size: 17px;
+      }
+      .ship_level {
+        // left: 420px;
+        right: -150px;
+        width: 200px;
+        top: 1px;
+        font-size: 16px;
+      }
+      .ship_class {
+        display: none;
+        left: 102px;
+        width: 200px;
+        bottom: 3px;
+      }
 
-    .ship_typeIcon {
-      position: absolute;
-      right: -51px;
-      z-index: 9;
-      height: auto;
-      width: 37px;
-      object-fit: cover;
-      top: -8px;
-    }
-    .ship_title {
-      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      position: absolute;
-      z-index: 6;
-      width: 359px;
-      color: #fff;
-      left: 123px;
-      top: 27px;
-      font-family: "Roboto";
-      font-size: 40px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 84.187%; /* 33.675px */
-      text-transform: uppercase;
-    }
-    // ._description-show{
-    //   visibility: visible;
-    // }
-    .ship_description {
-      // bottom: 0;
-      position: absolute;
-      // visibility: hidden;
-      width: 50px;
-      height: 50px;
-      background-image: url(./../../src/assets/img/helm.svg);
-      background-repeat: no-repeat;
-      font-size: 0;
-      right: 0;
-      top: 49px;
-      z-index: 12;
-      color: white;
-      font-family: "Roboto";
-      // background-color: gray;
-      transition: all 1s ease-in-out;
-    }
-    .ship_descriptionShow {
-      position: absolute;
-      transition: all 1s ease-in-out;
+      .ship_cColor {
+        display: none;
+      }
 
-      // visibility: visible;
-      height: 300px;
-      width: auto;
+      .ship_typeIcon {
+        position: absolute;
+        right: 57px;
+        z-index: 9;
+        height: auto;
+        width: 37px;
+        object-fit: cover;
+        top: -8px;
+      }
+      .ship_title {
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        position: absolute;
+        z-index: 10;
+        width: 359px;
+        color: #fff;
+        left: 200px;
+        top: 17px;
+        font-family: "Roboto";
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 101.187%;
+        text-transform: uppercase;
+      }
+      .ship_contour {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+      }
+      .ship_description {
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        gap: 15px;
+        padding: 30px;
+        font-size: 16px;
+        right: 0;
+        opacity: 0;
+        top: 120px;
+        color: white;
+        font-family: "Roboto";
+        transition: all 0.2s cubic-bezier(0.45, 0.95, 0.55, 0.75);
+
+        &::before {
+          content: attr(title);
+          font-size: 20px;
+        }
+      }
     }
   }
 }
 
-.pagePagination {
-  position: absolute;
-  z-index: 2;
-  width: 1000px;
-  display: flex;
-  gap: 59px;
+.container_table {
+  width: fit-content;
+  margin: auto;
+  // margin-top: 20px;
+
+  top: 100px;
+  position: relative;
+  @extend %flex-center;
+  .pagePaginations {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .tableTd {
+    padding: 8px;
+    text-align: center;
+  }
+  .tableTh {
+    text-align: center;
+    transition: color 0.5s ease-in-out;
+    &:hover {
+      color: rgb(255, 255, 255);
+    }
+  }
+  .ship_typeIcon,
+  .ship_image,
+  .ship_countryFlag,
+  .ship_contour {
+    margin: auto;
+  }
+  .ship_description {
+    cursor: pointer;
+    text-align: left;
+    width: 300px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
 }

@@ -1,9 +1,11 @@
 interface IShip {
+    
     title: string;
     description: string;
     icons: {
         large: string;
         medium: string;
+        contour: string;
     };
     level: number;
     type: {
