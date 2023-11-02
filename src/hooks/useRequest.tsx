@@ -21,6 +21,8 @@ function useRequest() {
                   image: el.icons.medium,
                   country: el.nation.title,
                   class: el.type.title,
+                  flag: el.nation.icons.large,
+                  contour: el.icons.contour,
                 };
               });
               setShips(arrangedShips);

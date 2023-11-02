@@ -53,7 +53,7 @@ function ShipsTable() {
             header: 'country',
             cell: (props: any) => <><span className={styles.ship_country}>{props.getValue()}</span></>
         }),
-        columnHelper.accessor('nation.icons.large', {
+        columnHelper.accessor('flag', {
             header: "флаг",
             cell: (props: any) => <> <img className={styles.ship_countryFlag} src={props.getValue()} width='100px' height='auto' alt="" />  </>
         }),
@@ -61,20 +61,17 @@ function ShipsTable() {
             header: "class icons",
             cell: (props: any) => <> <img className={styles.ship_typeIcon} src={props.getValue()} width='37px' height='33px' alt="" />  </>
         }),
-        columnHelper.accessor('icons.contour', {
+        columnHelper.accessor('contour', {
             header: "contour",
             cell: (props: any) => <> <img className={styles.ship_contour} src={props.getValue()} width='200px' height='auto' alt="" />  </>
         }),
-
         columnHelper.accessor('description', {
             header: "Описание",
             cell: (props: any) => <> <p title='Описание' className={styles.ship_description} >{props.getValue()}</p></>
         }),
 
     ]
-    const [columnFilters, setColumnFilters] = useState([
-
-    ])
+    const [columnFilters, setColumnFilters] = useState([])
     const table = useReactTable({
         data,
         columns,
@@ -107,7 +104,6 @@ function ShipsTable() {
             }, 250);
             tr.classList.add('ship_descriptionShow')
         }
-
         const hide = (tr: EventTarget & HTMLElement, desc: any) => {
             desc[0].style.opacity = "0"
             tr.classList.remove('ship_descriptionShow')
@@ -116,7 +112,6 @@ function ShipsTable() {
                 tr.style.height = '100px'
             }, 300);
         }
-
         const showHide = (tr: any, desc: any) => {
             if (tr.classList.contains('ship_descriptionShow')) {
                 return hide(tr, desc)
@@ -132,6 +127,7 @@ function ShipsTable() {
                 desc[0].classList.add('_show')
             }
         }
+
         if (isActive) {
             showHide(tr, desc)
         } else {
@@ -162,7 +158,6 @@ function ShipsTable() {
         }
     }
 
-  
 
     return (
         <>

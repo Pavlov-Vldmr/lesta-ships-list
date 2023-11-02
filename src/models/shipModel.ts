@@ -34,6 +34,8 @@ interface IShipsData extends IShip {
     image: string;
     country: string;
     class: string;
+    flag: string;
+    contour: string;
 }
 
 export type { IShip, IShipsData };
