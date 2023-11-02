@@ -5,7 +5,6 @@ import { IShip } from "../models/shipModel";
 function useRequest() {
     const [ships, setShips] = useState<IShip[]>([]);
     const requestUrl = 'https://vortex.korabli.su/api/graphql/glossary/';
-    // let ships
     const requestAllShips = (query: string) => {
         return fetch(requestUrl, {
             method: 'POST',
