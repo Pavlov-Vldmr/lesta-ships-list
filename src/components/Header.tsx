@@ -9,7 +9,7 @@ function Header() {
         <Box className="header">
         <Flex h="inherit">
           <Center h="inherit">
-            <Image src={logo} marginLeft="16px"/>
+            <Image src={logo} marginLeft="80px"/>
             <NavLink className="nav-link" to="/">Главная</NavLink>
             <NavLink className="nav-link" to="/shipslist">Корабли</NavLink>
           </Center>
